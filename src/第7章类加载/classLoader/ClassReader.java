@@ -651,29 +651,145 @@ public class ClassReader {
         /*
             name:   描述符索引
             length: U2
-            feature:指向常量池中的引用  代表方法的
+            feature:指向常量池中的引用  代表方法的描述符
+
+            描述符：基本数据类型(byte,char,double,float,int,long,short,boolean)以及代表无返回值的void类型都要有一个大写字符表示，对象用L加对象全限定名称
+            标识符：                        含义:
+            B                             byte
+            C                             char
+            D                             double
+            F                             float
+            I                             int
+            J                             long
+            S                             short
+            Z                             boolean
+            V                             void
+            L                             对象类型，如java.lang.Object  ->>> Ljava/lang/Object;
+            [                             代表一个维度数组  如：java.lang.String[][][] ->>>  [[[Ljava/lang/String;
         */
         uByte descriptor_index;
 
+        /*
+            name:   属性表计数
+            length: U2
+            feature:描述字段额外的信息  如 final static int m=123;  就会有一项 ConstantValue的属性
+        */
+        uByte attributes_count;
+
+        /*
+            name:   属性表
+            length: attributes_count
+            feature:属性值
+        */
+        AttributeInfo[] attributes;
+
+        public FieldInfo() {
+            access_flags = new uByte(U2);
+            name_index = new uByte(U2);
+            descriptor_index = new uByte(U2);
+            attributes_count = new uByte(U2);
+            attributes = new AttributeInfo[BytesUtil.bytes2Int(attributes_count.getValue())];
+            for (int i = 0; i < BytesUtil.bytes2Int(attributes_count.getValue()); i++) {
+                attributes[i] = new AttributeInfo();
+            }
+        }
     }
 
-    //字段数组
+    /*
+        name:   字段表
+        length: fields_count
+        feature:描述字段
+    */
+    private FieldInfo[] fields;
 
     //----------------------------------Fields  End--------------
 
 
     //----------------------------------Methods  Start--------------
-    //方法计数                          U2;
+    /*
+        name:   方法计数
+        length: U2
+        feature:方法数量
+    */
     private uByte methods_count;
 
-    //方法数组
+    static class MethodInfo {
+        /*
+           name:   访问标志
+           length: U2
+           feature:确定变量的访问标志
+       */
+        uByte access_flags;
 
+        /*
+            name:  名称索引
+            length: U2
+            feature:指向常量池的引用   代表字段的简单名称（比如int a;  简单名称为:a）
+        */
+        uByte name_index;
+
+        /*
+            name:   描述符索引
+            length: U2
+            feature:指向常量池中的引用  代表方法的描述符
+
+            描述符：基本数据类型(byte,char,double,float,int,long,short,boolean)以及代表无返回值的void类型都要有一个大写字符表示，对象用L加对象全限定名称
+            标识符：                        含义:
+            B                             byte
+            C                             char
+            D                             double
+            F                             float
+            I                             int
+            J                             long
+            S                             short
+            Z                             boolean
+            V                             void
+            L                             对象类型，如java.lang.Object  ->>> Ljava/lang/Object;
+            [                             代表一个维度数组  如：java.lang.String[][][] ->>>  [[[Ljava/lang/String;
+        */
+        uByte descriptor_index;
+
+        /*
+           name:   属性表计数
+           length: U2
+           feature:描述字段额外的信息  如 final static int m=123;  就会有一项 ConstantValue的属性
+       */
+        uByte attributes_count;
+
+        /*
+            name:   属性表
+            length: attributes_count
+            feature:属性值
+        */
+        AttributeInfo[] attributes;
+
+        @SuppressWarnings("Duplicates")
+        public MethodInfo() {
+            access_flags = new uByte(U2);
+            name_index = new uByte(U2);
+            descriptor_index = new uByte(U2);
+            attributes_count = new uByte(U2);
+            attributes = new AttributeInfo[BytesUtil.bytes2Int(attributes_count.getValue())];
+            for (int i = 0; i < BytesUtil.bytes2Int(attributes_count.getValue()); i++) {
+                attributes[i] = new AttributeInfo();
+            }
+        }
+    }
+    /*
+        name:   方法数组
+        length: methods_count
+        feature:方法表
+    */
+    private MethodInfo[] methods;
     //----------------------------------Methods  End--------------
 
     //----------------------------------Attributes  Start--------------
     //属性计数                          U2;
     private uByte attributes_count;
 
+    static class AttributeInfo {
+
+    }
     //属性数组
 
     //----------------------------------Attributes  End--------------
