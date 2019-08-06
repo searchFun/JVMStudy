@@ -1,7 +1,5 @@
 package 第7章类加载.classLoader;
 
-import sun.reflect.FieldInfo;
-
 import java.io.IOException;
 import java.io.InputStream;
 
