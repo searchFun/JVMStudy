@@ -5,6 +5,13 @@
     <file url="file://$PROJECT_DIR$/src/concurrent/homework/FileMaker.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/concurrent/homework/FileReader.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/concurrent/homework/Processor.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/concurrent/homework/log/AbstractLogger.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/concurrent/homework/log/FileLogger.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/concurrent/homework/log/ILog.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/concurrent/homework/log/LogEnum.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/concurrent/homework/log/LogWritter.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/concurrent/homework/log/LoggerTest.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/concurrent/homework/log/SimpleLogger.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/concurrent/线程池.md" charset="GBK" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
